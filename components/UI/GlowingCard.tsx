@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import styles from './GlowingCard.module.css';
 
 interface GlowingCardProps {
   children: React.ReactNode;
@@ -18,39 +17,41 @@ const GlowingCard: React.FC<GlowingCardProps> = ({
   const colorConfig = {
     blue: {
       gradient: 'from-blue-500 to-cyan-500',
-      glow: 'rgba(59, 130, 246, 0.3)',
-      border: 'border-blue-200'
+      border: 'border-blue-200',
+      shadow: 'shadow-blue-200'
     },
     green: {
       gradient: 'from-green-500 to-emerald-500',
-      glow: 'rgba(16, 185, 129, 0.3)',
-      border: 'border-green-200'
+      border: 'border-green-200',
+      shadow: 'shadow-green-200'
     },
     purple: {
       gradient: 'from-purple-500 to-pink-500',
-      glow: 'rgba(168, 85, 247, 0.3)',
-      border: 'border-purple-200'
+      border: 'border-purple-200',
+      shadow: 'shadow-purple-200'
     },
     orange: {
       gradient: 'from-orange-500 to-red-500',
-      glow: 'rgba(249, 115, 22, 0.3)',
-      border: 'border-orange-200'
+      border: 'border-orange-200',
+      shadow: 'shadow-orange-200'
     },
     red: {
       gradient: 'from-red-500 to-pink-500',
-      glow: 'rgba(239, 68, 68, 0.3)',
-      border: 'border-red-200'
+      border: 'border-red-200',
+      shadow: 'shadow-red-200'
     }
   };
 
   const intensityConfig = {
-    low: '0 4px 12px',
-    medium: '0 8px 24px',
-    high: '0 12px 36px'
+    low: 'shadow-lg',
+    medium: 'shadow-xl',
+    high: 'shadow-2xl'
   };
 
   const config = colorConfig[color];
+  const shadowClass = intensityConfig[intensity];
 
+  return (
     <div 
       className={`
         relative rounded-2xl p-6
@@ -58,14 +59,13 @@ const GlowingCard: React.FC<GlowingCardProps> = ({
         transition-all duration-500
         hover:scale-[1.02] hover:shadow-2xl
         group
+        ${shadowClass} ${config.shadow}
         ${className}
-        glowing-card-${color}-${intensity}
       `}
-    >
     >
       {/* Gradient Border Effect */}
       <div className={`
-        absolute inset-0 rounded-2xl bg-gradient-to-r ${config.gradient} opacity-0 
+        absolute inset-0 rounded-2xl bg-linear-to-r ${config.gradient} opacity-0 
         group-hover:opacity-5 transition-opacity duration-500
       `}></div>
       
